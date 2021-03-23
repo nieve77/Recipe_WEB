@@ -1,0 +1,187 @@
+@CHARSET "EUC-KR";
+
+body { margin:0; padding:0 }
+body {
+	background-color: #F5F6F7;
+}
+#container1 { margin:0 10px}
+.su {margin:3px 0 3px 1px;font-size:12px; color:#6799FF}
+.error{margin:3px 0 3px 1px;font-size:12px;color:#f00}
+.join_birth{display:table;padding-right:15px;*display:block;*overflow:hidden}
+.join_birthday .error{margin-left: 13px}
+.bir_title{display:table-cell;padding:3px 20px 0 14px;table-layout:fixed;background:#EAEAEA;border-right:1px solid #efefef;font-size:13px;color:#999;text-align:center;*display:block;*float:left;*height:50px;*line-height:50px;vertical-align:middle}
+.bir_yy,.bir_mm,.bir_dd{display:table-cell;padding:11px 0 11px 16px;width:280px;table-layout:fixed;vertical-align:middle;*display:block;*float:left}
+.bir_yy{padding-left:14px;padding-right:4px}
+.bir_dd{padding-left:15px;padding-right:3px}
+.bir_mm{padding-left:15px;padding-right:20px}
+.ps_box{display:block;position:relative;height:50px;background:#fff url("./imgs/ico_join.png") 100% 0 no-repeat;background-size:97px 900px;-webkit-background-size:97px 900px}
+
+a:hover,a:active,a:focus{text-decoration:underline}
+
+.ps_box.int_id{background-position:100% -57px}
+.ps_box.int_pass{background-position:100% -476px}
+.ps_box.int_pass_step1{background-position:100% -126px}
+.ps_box.int_pass_step2{background-position:100% -196px}
+.ps_box.int_pass_step3{background-position:100% -266px}
+.ps_box.int_pass_step4{background-position:100% -336px}
+.ps_box.int_pass_check{background-position:100% -525px}
+.ps_box.int_pass_check2{background-position:100% -406px}
+#headerCus {
+	margin: 0 auto;
+}
+.join_header {
+	width:100%;
+	margin:0 auto
+}
+
+.join_contents{ margin:0 auto }
+.row_group,.ipin_box{border:solid 1px #dadada;
+                     background:#fff;
+                     margin-bottom:10px;
+                     zoom:1
+}
+.form_box{display:block;
+        position:relative;
+        height:27px;
+        background:#fff url("../imgs/ico_join.png") 100% 0 no-repeat;
+        background-size:97px 900px;
+        -webkit-background-size:97px 900px
+}
+
+.form_box.int_id{background-position:100% 0px}
+.form_box.int_pass{background-position:100% -476px}
+.form_box.int_reCheck{background-position:100% -525px}
+.int_id, .int_pass,
+.int_pass_check,
+.int_pass_step1,
+.int_pass_step2,
+.int_pass_step3,
+.int_pass_step4,
+.int_pass_check2 { padding_right: 95px}
+
+.join_row{*position:relative;
+          padding:11px 11px 11px 13px;
+          border-top:solid 1px #f0f0f0;
+          background:#fff;
+          box-sizing:border-box;
+          -webkit-box-sizing:border-box;
+          -moz-box-sizing:border-box
+}
+
+.join_row:first-child{ border-top:none }
+.cell{display:table-cell;
+      width:5px;
+      padding-right:10px;
+      background:url("../imgs/bar.gif") -96px -575px no-repeat;
+      background-size:97px 900px;
+      -webkit-background-size:97px 900px;
+      text-indent:-999em;
+      *display:block;
+      *float:left;
+      *padding:0
+}
+.join_from .lbl{display:block;
+                position:absolute;
+                top:5px;
+                left:0;
+                z-index:9;
+                font-size:15px;
+                font-weight:bold;
+                line-height:18px;
+                color:#999
+}
+
+.join_gender{overflow:hidden;
+             padding:8px 18px 8px 15px
+}
+
+.join_row .int{position:relative;
+               *position:absolute;
+               *top:0;
+               *left:0;
+               z-index:10;
+               padding:0px 0;
+               width:80%;
+               height:28px;
+               border:none;
+               background:#fff;
+               font-size:15px;
+               font-weight:bold;
+               none;
+               apperance:none;
+               -webkit-apperance:none
+}
+.gender{display:block;height:33px;margin-right:-3px;border:solid 1px #dcdcdc;*margin-top:-31px}
+.genderLine{display:block;float:left;position:relative;z-index:10;width:50%;height:31px;border-right:solid 1px #dcdcdc}
+.genderLine + .genderLine{border:none}
+.genderLine input{position:absolute;top:0;left:0;z-index:9;width:100%;height:20px}
+.genderLine label{display:block;position:absolute;top:0px;left:0;z-index:10;width:100%;height:31.49px;line-height:33px;background:#fff;text-align:center;color:#999;cursor:pointer}
+.genderLine input:checked + label{border:solid 1px #F15F5F;margin:0px;z-index:100;color:#F15F5F}
+.genderLine label.on{border:solid 1px #2eaa08;margin:-1px;z-index:100;color:#2eaa08}
+.global .genderLine,.global .genderLine input,.global .genderLine label{font-size:15px;color:#969696}
+.global .genderLine label.on{color:#2eaa08}
+
+
+@media only screen and (min-width:1024px){
+	#contents{width:900px;margin:0 auto !important}
+	.join_contents{width:760px;margin:0 auto}
+	#container1{width:900px;margin:0 auto !important}
+	#headerCus{width:760px; margin:0 auto; margin-bottom: 10px !important}
+	.join_birthday { padding:0 !important}
+}
+@MEDIA only screen and (max-width:1024px) {
+	.join_header, #headerCus{width:100%; margin-bottom: 10px !important}
+	.join_birthday { padding:0 !important}
+}
+
+@MEDIA only screen and (max-width:780px) {
+	.join_header, #headerCus{width:100%; margin-bottom: 10px !important}
+	.join_birthday { padding:0 !important}
+}
+
+@media only screen and (max-width:450px) {
+	.join_header, #headerCus { width:100%; margin-bottom: 10px !important}
+	.join_birthday { padding:0 !important}
+}
+
+@media only screen and (max-width:320px) {
+	.join_header, #headerCus { width:100%; margin-bottom: 10px !important}
+	.join_birthday { padding:0 !important}
+}
+	
+.join_Btn input{width:100%;border:1px solid #CC3D3D;*border:none;height:61px;background:#F15F5F url("../imgs/join_Btn.jpg") 50% 50% no-repeat;background-size:108px auto;-webkit-background-size:108px auto;text-indent:-999em;*text-indent:0;*padding-left:900px;-webkit-appearance:none}
+.join_Btn{display:block;height:61px;*width:460px;margin:20px 0 19px;margin:10px 0 19px\9;background:#F15F5F}
+.sel{width:100%;padding:6px 8px 6px 0;height:29px;*height:auto;*margin-top:3px;border:none;border-radius:0;background:#fff url("../imgs/sel_arr.gif") 100% 50% no-repeat;background-size:20px 8px;-webkit-background-size:20px 8px;-webkit-appearance:none;font-size:15px;font-weight:bold;line-height:18px;color:#000}
+
+.int_fix{position:relative;
+	     *position:absolute;
+	     *top:0;
+	     *left:0;
+	     z-index:10;
+	     padding:0px 0;
+	     width:100%;
+	     height:28px;
+	     border:none;
+	     background:#fff;
+	     font-size:15px;
+	     font-weight:bold;
+	     none;
+	     apperance:none;
+	     -webkit-apperance:none
+}
+.int_date{position:relative;
+	     *position:absolute;
+	     *top:0;
+	     *left:0;
+	     z-index:10;
+	     padding:0px 0;
+	     width:100%;
+	     height:28px;
+	     border:none;
+	     background:#fff;
+	     font-size:15px;
+	     font-weight:bold;
+	     none;
+	     apperance:none;
+	     -webkit-apperance:none
+}

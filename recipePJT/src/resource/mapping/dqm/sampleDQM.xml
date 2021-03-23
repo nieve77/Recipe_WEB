@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="board">
+	<!-- parameterType , resultType , resultMap -->
+	
+	<select id="selectAll" resultType="board">
+		select seq , 
+		       writer , 
+		       title , 
+		       content , 
+		       to_char(regdate,'YYYY-MM-DD') as regdate , 
+		       cnt
+		from otsboard
+		order by seq
+	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		insert into otsboard values((select max(seq)+1 from otsboard),
+		                            #{writer},
+		                            #{title},
+		                            #{content},
+		                            sysdate,
+		                            0)
+	</insert>	
+	
+	<select id="selectPK" parameterType="board" resultType="board">
+		select seq , writer , title , content , regdate , cnt
+		from otsboard
+		where seq = #{seq} 
+	</select>
+	<update id="upCnt" parameterType="board">
+		update otsboard set cnt = cnt+1 
+		where seq = #{seq}
+	</update>
+	<update id="updateBoard" parameterType="board" >
+		update otsboard set title = #{title} , content = #{content}
+		where seq = #{seq} 
+	</update>
+	<delete id="deleteBoard" parameterType="board" >
+		delete from otsboard 
+		where seq = #{seq}  
+	</delete>
+	
+	
+	<select id="searchAll" resultType="board">
+		select seq , writer , title , content , regdate , cnt
+		from otsboard
+		<where>
+			<if test="searchCondition == 'title'">
+				title like '%'||#{searchKeyword}||'%'		
+			</if>
+			<if test="searchCondition == 'content'">
+				content like '%'||#{searchKeyword}||'%'		
+			</if>
+		</where>
+		order by seq  
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

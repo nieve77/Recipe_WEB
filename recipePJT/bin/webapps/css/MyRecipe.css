@@ -1,0 +1,53 @@
+@CHARSET "EUC-KR";
+
+#hiddenbodyCus {
+	background-color: #fff
+}
+#topBtnStyle {
+	margin:0 auto;
+}
+#MyRecipeHeader {
+	width:1400px;
+	margin:0 auto;
+	border-bottom-width:5px;
+	border-bottom-color: #A6A6A6;
+	border-bottom-style: inset;
+	-moz-box-shadow: 0 0 35px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: 0 0 35px rgba(0, 0, 0, .4);
+	box-shadow: 0 0 35px rgba(0, 0, 0, .4);
+}
+.MyRecipeHeaderImg{
+	width:100%;
+	margin:0 auto
+}
+
+#MyRecipe-main {
+	-moz-box-shadow: 0 0 35px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: 0 0 35px rgba(0, 0, 0, .4);
+	box-shadow: 0 0 35px rgba(0, 0, 0, .4);
+	margin-top: 117px;
+	max-width: 1400px;
+}
+
+#MyRecipe-main, .MyRecipe-aux {
+	margin: auto;
+	background-color:#fff;
+	max-width: 1400px;
+	height:1500px
+}
+
+@media screen and (max-width:1400px) {
+	#MyRecipeHeader {
+		width:100%;
+	}
+	#topBtnStyle {
+		width:180px
+	}
+}
+
+@media screen and (max-width:200px) {
+	#MyRecipeHeader {
+		width:100%;
+	}
+	
+}

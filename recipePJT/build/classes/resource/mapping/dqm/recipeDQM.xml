@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="user">
+	<!-- parameterType , resultType , resultMap -->
+	
+	<select id="login" parameterType="recipe.user.vo.UserVO" resultType="recipe.user.vo.UserVO">
+		select user_id, user_name, nickname, pwd, cellphone,to_char(birth_date, 'YYYY-MM-DD') birth_date, gender, mail, user_division
+		from info
+		where user_id = #{user_id} and pwd = #{pwd}
+	</select>
+	
+	<insert id="join" parameterType="recipe.user.vo.UserVO">
+		insert into info(user_id, user_name,nickname, pwd, cellphone, birth_date, gender, mail, user_division)
+		values(#{user_id},#{user_name},#{nickname},#{pwd},#{cellphone},#{birth_date},#{gender},#{mail},default)
+	</insert>
+	
+	<select id="search" parameterType="recipe.user.vo.UserVO" resultType="recipe.user.vo.UserVO">
+		select user_id from info where user_id=#{user_id}
+	</select>
+	
+	<update id="update" parameterType="recipe.user.vo.UserVO">
+		update info set pwd=#{pwd}, nickname=#{nickname}, cellphone=#{cellphone}, mail=#{mail} where user_id=#{user_id}
+	</update>
+	
+	<delete id="delete" parameterType="recipe.user.vo.UserVO">
+		delete from info where user_id=#{user_id} and pwd=#{pwd}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

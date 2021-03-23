@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="recipeBoard">
+	<!-- parameterType , resultType , resultMap -->
+	<insert id="upload" parameterType="recipe.board.vo.Write_BoardVO">
+		insert into recipe_board(recipe_board_num, recipe_category, user_id, recipe_name, recipe_path, recipe_material, recipe_feature, time, recipe_detail)
+		values(recipe_board_seq.nextval,#{recipe_category},#{user_id},#{recipe_name},#{recipe_path},#{recipe_material},#{recipe_feature},sysdate,#{recipe_detail})
+	</insert>
+	<select id="searchListOne" parameterType="recipe.board.vo.Write_BoardVO" resultType="recipe.board.vo.Write_BoardVO">
+		select recipe_board_num, recipe_category, user_id, recipe_name, recipe_path, recipe_material, recipe_feature, time, recipe_detail
+		from recipe_board where recipe_category=#{recipe_category} order by time desc
+	</select>
+	<select id="cookViewRow" parameterType="recipe.board.vo.Write_BoardVO" resultType="recipe.board.vo.Write_BoardVO">
+		select recipe_board_num, recipe_category, user_id, recipe_name, recipe_path, recipe_material, recipe_feature, time, recipe_detail
+		from recipe_board where recipe_board_num=#{recipe_board_num}
+	</select>
+	<insert id="recipeClipRow" parameterType="recipe.board.vo.Recipe_MyPageVO" >
+		insert into my_page(user_id,scrap_seq,recipe_board_num,recipeClip_category,recipeClip_name,recipeClip_path,recipeClip_material,recipeClip_feature,Clip_time,recipeClip_detail)
+		values(#{user_id},scrap_seq.nextval,#{recipe_board_num},#{recipeClip_category},#{recipeClip_name},#{recipeClip_path},#{recipeClip_material},#{recipeClip_feature},sysdate,#{recipeClip_detail})
+	</insert>
+	<select id="myRecipeRow" parameterType="recipe.board.vo.Write_BoardVO" resultType="recipe.board.vo.Write_BoardVO">
+		select recipe_board_num, recipe_category, user_id, recipe_name, recipe_path, recipe_material, recipe_feature, time, recipe_detail
+		from recipe_board where user_id=#{user_id}
+	</select>
+	<select id="myRecipeClipRow" parameterType="recipe.board.vo.Recipe_MyPageVO" resultType="recipe.board.vo.Recipe_MyPageVO">
+		select user_id,scrap_seq,recipe_board_num,recipeClip_category,recipeClip_name,recipeClip_path,recipeClip_material,recipeClip_feature,Clip_time,recipeClip_detail
+		from my_page where user_id=#{user_id}
+	</select>
+	<insert id="noticWriteRow" parameterType="recipe.board.vo.Notice_boardVO">
+		insert into notice_board(notice_board_seq,admin_title,admin_content,admin_writer,admin_regdate,cnt)
+		values(notice_board_seq.nextval,#{admin_title},#{admin_content},#{admin_writer},sysdate,0)
+	</insert>
+	<update id="modifyUpdateRow" parameterType="recipe.board.vo.Write_BoardVO">
+		update recipe_board 
+		set recipe_category=#{recipe_category}, recipe_name=#{recipe_name}, recipe_path=#{recipe_path}, recipe_material=#{recipe_material}, recipe_feature=#{recipe_feature}, time=sysdate, recipe_detail=#{recipe_detail}
+		where recipe_board_num=#{recipe_board_num}
+	</update>
+	<delete id="cookDeleteRow2" parameterType="recipe.board.vo.Write_BoardVO">
+		delete from my_page where recipe_board_num=#{recipe_board_num}
+	</delete>
+	<delete id="cookDeleteRow3" parameterType="recipe.board.vo.Write_BoardVO">
+		delete from recipe_function where recipe_board_num=#{recipe_board_num}
+	</delete>
+	<delete id="cookDeleteRow4" parameterType="recipe.board.vo.Write_BoardVO">
+		delete from recipe_reply where recipe_board_num=#{recipe_board_num}
+	</delete>
+	<delete id="cookDeleteRow" parameterType="recipe.board.vo.Write_BoardVO">
+		delete from recipe_board where recipe_board_num=#{recipe_board_num}
+	</delete>
+	<select id="noticeListRow" resultType="recipe.board.vo.Notice_boardVO">
+		select notice_board_seq, admin_title, admin_content, admin_writer, to_char(admin_regdate, 'YYYY-MM-DD') admin_regdate, cnt
+		from notice_board
+	</select>
+	<select id="customListRow" resultType="recipe.board.vo.Custom_boardVO">
+		select custom_board_seq, custom_title, custom_content, user_id, to_char(custom_regdate, 'YYYY-MM-DD') custom_regdate, cnt
+		from custom_board
+	</select>
+	<insert id="customWriteRowUP">
+		insert into custom_board(custom_board_seq, custom_title, custom_content, user_id, custom_regdate, cnt)
+		values(custom_board_seq.nextval,#{custom_title},#{custom_content},#{user_id},sysdate,0)
+	</insert>
+	<insert id="loveHateInsertRow">
+		insert into
+		recipe_function(user_id,recipe_board_num,love_hate,function_date)
+		values(#{user_id},#{recipe_board_num},1,sysdate)
+	</insert>
+	<insert id="HateInsertRow">
+		insert into
+		recipe_function(user_id,recipe_board_num,love_hate,function_date)
+		values(#{user_id},#{recipe_board_num},-1,sysdate)
+	</insert>
+	<select id="searchRankRow" resultType="recipe.board.vo.Recipe_FunctionVO">
+		SELECT  distinct recipe_board_num,SUM(LOVE_HATE),
+		RANK() OVER(ORDER BY SUM(LOVE_HATE) DESC), RECIPE_PATH,RECIPE_NAME FROM
+		recipe_function JOIN RECIPE_BOARD USING(RECIPE_BOARD_NUM)
+		WHERE (function_date BETWEEN TRUNC(SYSDATE+1)-TO_CHAR(SYSDATE,'D') AND
+		TRUNC(SYSDATE+1)-TO_CHAR(SYSDATE,'D')+6.99999421)
+		GROUP BY recipe_board_num,RECIPE_PATH,RECIPE_NAME
+		ORDER BY SUM(LOVE_HATE) DESC
+	</select>
+	<select id="noticeViewRow" parameterType="recipe.board.vo.Notice_boardVO" resultType="recipe.board.vo.Notice_boardVO">
+		select notice_board_seq, admin_title, admin_content, admin_writer, admin_regdate, cnt
+		from notice_board where notice_board_seq=#{notice_board_seq}
+	</select>
+	<update id="cntRow" parameterType="recipe.board.vo.Notice_boardVO">
+		update notice_board set cnt=cnt+1 where notice_board_seq=#{notice_board_seq}
+	</update>
+	<select id="customViewRow" parameterType="recipe.board.vo.Custom_boardVO" resultType="recipe.board.vo.Custom_boardVO">
+		select custom_board_seq, custom_title, custom_content, user_id, custom_regdate, cnt
+		from custom_board where custom_board_seq=#{custom_board_seq}
+	</select>
+	<update id="cntRowCus" parameterType="recipe.board.vo.Custom_boardVO">
+		update custom_board set cnt=cnt+1 where custom_board_seq=#{custom_board_seq}
+	</update>
+	<select id="replyClipRow" parameterType="recipe.board.vo.Recipe_replyVO" resultType="recipe.board.vo.Recipe_replyVO">
+		select user_id, recipe_board_num, recipe_reply_seq, reply, reply_time
+		from recipe_reply where recipe_board_num=#{recipe_board_num} order by reply_time
+	</select>
+	<insert id="replyRow" parameterType="recipe.board.vo.Recipe_replyVO">
+		insert into recipe_reply(user_id,recipe_board_num,recipe_reply_seq,reply,reply_time)
+		values(#{user_id},#{recipe_board_num},recipe_reply_seq.nextval,#{reply},sysdate)
+	</insert>
+	<select id="love_Count" resultType="recipe.board.vo.Recipe_FunctionVO"> 
+	    select count(*) count from recipe_function where recipe_board_num=#{recipe_board_num} and user_id=#{user_id} and NOT(love_hate is null) 
+    </select>
+
+	<select id="hate_Count" resultType="recipe.board.vo.Recipe_FunctionVO"> 
+	    select count(*) count from recipe_function where recipe_board_num=#{recipe_board_num} and user_id=#{user_id} and NOT(love_hate is null) 
+    </select>
+
+	<select id="love_SumRow" resultType="recipe.board.vo.Recipe_FunctionVO"> 
+	    select count(love_hate) count from recipe_function where recipe_board_num=#{recipe_board_num} and NOT(love_hate=-1) 
+    </select>
+
+	<select id="hate_SumRow" resultType="recipe.board.vo.Recipe_FunctionVO"> 
+	    select count(love_hate) count from recipe_function where recipe_board_num=#{recipe_board_num} and NOT(love_hate=1) 
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
